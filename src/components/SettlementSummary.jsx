@@ -81,24 +81,22 @@ export const SettlementSummary = () => {
 
   const minimumTransaction = calculateMinimumTransaction(expenses, members, splitAmount)
 
-  const exportToImage = () => {
+  const exportToImage = async () => {
     if (wrapperElement.current === null) {
       return
     }
-
-    toPng(wrapperElement.current, {
-      filter: (node) => node.tagName !== 'BUTTON',
-    })
-      .then((dataURL) => {
-        const link = document.createElement('a')
-        link.download = 'settlement-summary.png'
-        link.href = dataURL
-
-        link.click()
+    try {
+      const dataUrl = await toPng(wrapperElement.current, {
+        filter: (node) => node.tagName !== 'BUTTON',
       })
-      .catch((err) => {
-        console.error(err)
-      })
+  
+      const link = document.createElement('a')
+      link.download = 'settlement-summary.png'
+      link.href = dataUrl
+      link.click()
+    } catch(err) {
+      console.error(err)
+    }
 
   }
   return (

@@ -26,7 +26,7 @@ export const CreateGroup = () => {
   }
   return (
     <CenteredOverlayForm
-      title="먼저, 더치 페이 할 그룹의 이름을 정해볼까요?"
+      title="먼저, 더치 페이 할 그룹의 이름을 정해볼까요?(배포)"
       validated={validated}
       handleSubmit={handleSubmit}
     >
